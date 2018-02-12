@@ -1,43 +1,17 @@
-package ru.stqa.pft.adderssbook;
+package ru.stqa.pft.adderssbook.appmanager;
 
-import org.openqa.selenium.firefox.FirefoxOptions;
-import org.testng.annotations.AfterMethod;
-import org.testng.annotations.BeforeMethod;
-import org.testng.annotations.Test;
-
-import java.util.concurrent.TimeUnit;
-
+import org.openqa.selenium.By;
 import org.openqa.selenium.firefox.FirefoxDriver;
-import org.openqa.selenium.*;
+import ru.stqa.pft.adderssbook.model.ContactData;
 
-public class ContactCreationTests {
+public class ContactHelper {
   FirefoxDriver wd;
 
-  @BeforeMethod
-  public void setUp() throws Exception {
-    wd = new FirefoxDriver(new FirefoxOptions().setLegacy(true).setBinary("C:/Program Files (x86)/Mozilla Firefox/esr/firefox.exe"));
-    wd.manage().timeouts().implicitlyWait(60, TimeUnit.SECONDS);
-    wd.get("http://localhost/addressbook/");
-    login("admin", "secret");
+  public ContactHelper(FirefoxDriver wd) {
+    this.wd = wd;
   }
 
-  private void login(String username, String password) {
-    wd.findElement(By.name("user")).click();
-    wd.findElement(By.name("user")).sendKeys(username);
-    wd.findElement(By.name("pass")).click();
-    wd.findElement(By.name("pass")).sendKeys(password);
-    wd.findElement(By.xpath("//form[@id='LoginForm']/input[3]")).click();
-  }
-
-
-  @Test
-  public void testAddNewContact(){
-    initContactCreation();
-    fillContactForm(new ContactData("Yuri", "Sidorin", "YuSidorin", "test", "Cnet", "test", "890898098980", "asd", "asda"));
-    submitContact();
-  }
-
-  private void fillContactForm(ContactData contactData) {
+  public void fillContactForm(ContactData contactData) {
     wd.findElement(By.name("firstname")).click();
     wd.findElement(By.name("firstname")).clear();
     wd.findElement(By.name("firstname")).sendKeys(contactData.getFirstname());
@@ -67,15 +41,11 @@ public class ContactCreationTests {
     wd.findElement(By.name("homepage")).sendKeys(contactData.getHomepage());
   }
 
-  private void initContactCreation() {
+  public void initContactCreation() {
     wd.findElement(By.linkText("add new")).click();
   }
-  private void submitContact() {
+
+  public void submitContact() {
     wd.findElement(By.name("submit")).click();
   }
-  @AfterMethod
-  public void tearDown() {
-    wd.quit();
-  }
-
 }
