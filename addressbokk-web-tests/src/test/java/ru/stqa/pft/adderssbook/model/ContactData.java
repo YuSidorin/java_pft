@@ -7,11 +7,11 @@ public class ContactData {
   private final String title;
   private final String company;
   private final String address;
-  private final CharSequence phone;
+  private final String phone;
   private final String email;
   private final String homepage;
 
-  public ContactData(String firstname, String lastname, String nickname, String title, String company, String address, CharSequence phone, String email, String homepage) {
+  public ContactData(String firstname, String lastname, String nickname, String title, String company, String address, String phone, String email, String homepage) {
     this.firstname = firstname;
     this.lastname = lastname;
     this.nickname = nickname;
@@ -47,7 +47,7 @@ public class ContactData {
     return address;
   }
 
-  public CharSequence getPhone() {
+  public String getPhone() {
     return phone;
   }
 
