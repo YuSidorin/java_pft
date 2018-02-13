@@ -9,8 +9,10 @@ public class NavigationHelper extends BaseHelper {
     super(wd);
 
   }
-
   public void gotoGroup() {
     click(By.linkText("groups"));
+  }
+  public void submitModification() {
+    click(By.name("update"));
   }
 }

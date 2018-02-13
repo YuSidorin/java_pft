@@ -12,7 +12,7 @@ public class ContactHelper extends BaseHelper {
 
   public void fillContactForm(ContactData contactData) {
     type(By.name("firstname"), contactData.getFirstname());
-    type(By.name("lastname"),contactData.getLastname());
+    type(By.name("lastname"), contactData.getLastname());
     type(By.name("nickname"), contactData.getNickname());
     type(By.name("title"), contactData.getTitle());
     type(By.name("company"), contactData.getCompany());
@@ -28,5 +28,13 @@ public class ContactHelper extends BaseHelper {
 
   public void submitContact() {
     click(By.name("submit"));
+  }
+
+  public void initContactModification() {
+    click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
+  }
+
+  public void deleteContact() {
+    click(By.xpath("//div[@id='content']/form[2]/input[2]"));
   }
 }
