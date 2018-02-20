@@ -60,4 +60,6 @@ public class ContactData {
   public String getHomepage() {
     return homepage;
   }
+
+  public String getGroup() { return group; }
 }

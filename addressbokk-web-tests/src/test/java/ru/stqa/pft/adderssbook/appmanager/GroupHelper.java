@@ -2,7 +2,6 @@ package ru.stqa.pft.adderssbook.appmanager;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import ru.stqa.pft.adderssbook.model.GroupData;
 
 public class GroupHelper extends BaseHelper {
@@ -11,7 +10,8 @@ public class GroupHelper extends BaseHelper {
     super(wd);
   }
 
-  public void submitGroupCreation() { click(By.name("submit"));
+  public void submitGroupCreation() {
+    click(By.name("submit"));
   }
 
   public void initGroupCreation() {
@@ -28,7 +28,7 @@ public class GroupHelper extends BaseHelper {
     wd.findElement(By.linkText("group page"));
   }
 
-  public void deleteSeletedGroup() {
+  public void deleteSelectedGroup() {
     click(By.name("delete"));
   }
 
@@ -36,8 +36,17 @@ public class GroupHelper extends BaseHelper {
     click(By.name("selected[]"));
   }
 
-  public void initGroupModification() {
-    click(By.name("edit"));
+  public void initGroupModification() { click(By.name("edit"));
   }
 
+  public void createGroup(GroupData group) {
+    initGroupCreation();
+    fillForm(group);
+    submitGroupCreation();
+    returnToGroupPage();
+  }
+
+  public boolean isThereAGroup() {
+    return isElementPresent(By.name("selected[]"));
+  }
 }
