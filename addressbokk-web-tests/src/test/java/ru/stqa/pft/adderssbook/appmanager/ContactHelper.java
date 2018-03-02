@@ -64,10 +64,10 @@ public class ContactHelper extends BaseHelper {
         List<WebElement> elements = wd.findElements(By.xpath("//tr[@name='entry']"));
         for (WebElement element : elements) {
           List<WebElement> cells = element.findElements(By.tagName("td"));
-            String firstname = cells.get(0).getText();
-            String lastname = cells.get(1).getText();
-//            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            ContactData contact = new ContactData(firstname, lastname, null, null, null, null, null, null, null, null);
+            String firstname = cells.get(1).getText();
+            String lastname = cells.get(2).getText();
+            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            ContactData contact = new ContactData(id, firstname, lastname, null, null, null, null, null, null, null, null);
             contacts.add(contact);
         }
         return contacts;
