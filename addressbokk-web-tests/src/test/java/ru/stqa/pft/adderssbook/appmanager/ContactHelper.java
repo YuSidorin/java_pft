@@ -7,7 +7,6 @@ import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.adderssbook.model.ContactData;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -62,11 +61,15 @@ public class ContactHelper extends BaseHelper {
 
     public List<ContactData> getContactsList() {
         List<ContactData> contacts = new ArrayList<ContactData>();
-        List<WebElement> cells = wd.findElements(By.tagName("td"));
-        for (WebElement element : cells) {
-            String name = new ContactData("Yuri", "Sidorin111", "YuSidorin", "test", "Cnet", "test", "890898098980", "asd", "asda", null);
+        List<WebElement> elements = wd.findElements(By.xpath("//tr[@name='entry']/td"));
+        for (WebElement element : elements) {
+//          List<WebElement> cells = element.findElements(By.tagName("td"));
+            String firstname = element.getText();
+//            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+            ContactData contact = new ContactData(firstname, null, null, null, null, null, null, null, null, null);
+            contacts.add(contact);
         }
-
+        return contacts;
     }
 
     public void selectContact(int index) {
