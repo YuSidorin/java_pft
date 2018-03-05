@@ -12,68 +12,64 @@ import java.util.List;
 
 public class ContactHelper extends BaseHelper {
 
-    public ContactHelper(WebDriver wd) {
-        super(wd);
-    }
+  public ContactHelper(WebDriver wd) {
+    super(wd);
+  }
 
-    public void fillContactForm(ContactData contactData, boolean creation) {
-        type(By.name("firstname"), contactData.getFirstname());
-        type(By.name("lastname"), contactData.getLastname());
-        type(By.name("nickname"), contactData.getNickname());
-        type(By.name("title"), contactData.getTitle());
-        type(By.name("company"), contactData.getCompany());
-        type(By.name("address"), contactData.getAddress());
-        type(By.name("mobile"), contactData.getPhone());
-        type(By.name("email"), contactData.getEmail());
-        type(By.name("homepage"), contactData.getHomepage());
-        if (creation) {
-            new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
-        } else {
-            Assert.assertFalse(isElementPresent(By.name("new_group")));
-        }
+  public void fillContactForm(ContactData contactData, boolean creation) {
+    type(By.name("firstname"), contactData.getFirstname());
+    type(By.name("lastname"), contactData.getLastname());
+    type(By.name("nickname"), contactData.getNickname());
+    type(By.name("title"), contactData.getTitle());
+    type(By.name("company"), contactData.getCompany());
+    type(By.name("address"), contactData.getAddress());
+    type(By.name("mobile"), contactData.getPhone());
+    type(By.name("email"), contactData.getEmail());
+    type(By.name("homepage"), contactData.getHomepage());
+    if (creation) {
+      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+    } else {
+      Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
+  }
 
-    public void initContactCreation() {
-        click(By.linkText("add new"));
-    }
+  public void initContactCreation() {
+    click(By.linkText("add new"));
+  }
 
-    public void submitContact() {
-        click(By.name("submit"));
-    }
+  public void submitContact() {
+    click(By.name("submit"));
+  }
 
-    public void initContactModification() {
-        click(By.xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img"));
-    }
+  public void initContactModification(int index) {
+    wd.findElements(By.xpath("//table[@id='maintable']/tbody/tr/td[8]/a/img")).get(index).click();
+  }
 
-    public void deleteContact() {
-        click(By.xpath("//div[@id='content']/form[2]/input[2]"));
-    }
+  public void deleteContact() {
+    click(By.xpath("//div[@id='content']/form[2]/input[2]"));
+  }
 
-    public boolean isThereAContact() {
-        return isElementPresent(By.name("selected[]"));
-    }
+  public boolean isThereAContact() {
+    return isElementPresent(By.name("selected[]"));
+  }
 
-    public void createContact(ContactData contactData, boolean creation) {
-        initContactCreation();
-        fillContactForm(contactData, creation);
-        submitContact();
-    }
+  public void createContact(ContactData contactData, boolean creation) {
+    initContactCreation();
+    fillContactForm(contactData, creation);
+    submitContact();
+  }
 
-    public List<ContactData> getContactsList() {
-        List<ContactData> contacts = new ArrayList<ContactData>();
-        List<WebElement> elements = wd.findElements(By.xpath("//tr[@name='entry']"));
-        for (WebElement element : elements) {
-          List<WebElement> cells = element.findElements(By.tagName("td"));
-            String firstname = cells.get(2).getText();
-            String lastname = cells.get(1).getText();
-            int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-            ContactData contact = new ContactData(id, firstname, lastname, null, null, null, null, null, null, null, null);
-            contacts.add(contact);
-        }
-        return contacts;
+  public List<ContactData> getContactsList() {
+    List<ContactData> contacts = new ArrayList<ContactData>();
+    List<WebElement> elements = wd.findElements(By.xpath("//tr[@name='entry']"));
+    for (WebElement element : elements) {
+      List<WebElement> cells = element.findElements(By.tagName("td"));
+      String firstname = cells.get(2).getText();
+      String lastname = cells.get(1).getText();
+      int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
+      ContactData contact = new ContactData(id, firstname, lastname, null, null, null, null, null, null, null, null);
+      contacts.add(contact);
     }
-
-    public void selectContact(int index) {
-        wd.findElements(By.name("selected[]")).get(index).click();
-    }
+    return contacts;
+  }
 }
