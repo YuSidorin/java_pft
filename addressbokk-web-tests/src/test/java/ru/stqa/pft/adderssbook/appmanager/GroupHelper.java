@@ -39,33 +39,38 @@ public class GroupHelper extends BaseHelper {
   public void selectGroup(int index) {
     wd.findElements(By.name("selected[]")).get(index).click();
   }
-
+  public void modify(int index, GroupData group) {
+    selectGroup(index);
+    initGroupModification();
+    fillForm(group);
+    submitModification();
+    returnToGroupPage();
+  }
   public void initGroupModification() {
     click(By.name("edit"));
   }
-
-  public void createGroup(GroupData group) {
+  public void submitModification() {
+    click(By.name("update"));
+  }
+  public void create(GroupData group) {
     initGroupCreation();
     fillForm(group);
     submitGroupCreation();
     returnToGroupPage();
   }
-
-  public boolean isThereAGroup() {
-    return isElementPresent(By.name("selected[]"));
+  public void delete(int index) {
+    selectGroup(index);
+    deleteSelectedGroup();
+    returnToGroupPage();
   }
 
-  public int countGroups() {
-    return wd.findElements(By.name("selected[]")).size();
-  }
-
-  public List<GroupData> getGroupList() {
+  public List<GroupData> list() {
     List<GroupData> groups = new ArrayList<GroupData>();
     List<WebElement> elements = wd.findElements(By.cssSelector("span.group"));
     for (WebElement element : elements) {
       String name = element.getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      GroupData group = new GroupData(id, name, null, null);
+      GroupData group = new GroupData().withId(id).withName(name);
       groups.add(group);
     }
     return groups;
