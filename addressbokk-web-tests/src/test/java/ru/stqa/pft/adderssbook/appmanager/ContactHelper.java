@@ -6,9 +6,12 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.adderssbook.model.ContactData;
+import ru.stqa.pft.adderssbook.model.GroupData;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 public class ContactHelper extends BaseHelper {
 
@@ -41,12 +44,13 @@ public class ContactHelper extends BaseHelper {
     click(By.name("submit"));
   }
 
-  public void initContactModification(int index) {
-    wd.findElements(By.xpath("//table[@id='maintable']/tbody/tr/td[8]/a/img")).get(index).click();
+  public void initContactModificationById(int id) {
+//    wd.findElement(By.xpath("//table[@id='maintable']/tbody/tr/td[8]/a/img")).click(); By.cssSelector("a{href='edit.php?id="+id+"']")
+wd.findElement(By.xpath("//a[.='edit.php?id=" + id +"']")).click();
   }
 
-  public void modify(int index, ContactData contact) {
-    initContactModification(index);
+  public void modify(ContactData contact) {
+    initContactModificationById(contact.getId());
     fillContactForm((contact), false);
     submitModification();
     goToHomePage();
@@ -60,8 +64,8 @@ public class ContactHelper extends BaseHelper {
     click(By.xpath("//div[@id='content']/form[2]/input[2]"));
   }
 
-  public void delete(int index) {
-    initContactModification(index);
+  public void delete(ContactData contact) {
+    initContactModificationById(contact.getId());
     deleteContact();
     goToHomePage();
   }
@@ -83,15 +87,16 @@ public class ContactHelper extends BaseHelper {
     submitContact();
   }
 
-  public List<ContactData> list() {
-    List<ContactData> contacts = new ArrayList<ContactData>();
+  public Set<ContactData> all() {
+    Set<ContactData> contacts = new HashSet<ContactData>();
     List<WebElement> elements = wd.findElements(By.xpath("//tr[@name='entry']"));
     for (WebElement element : elements) {
       List<WebElement> cells = element.findElements(By.tagName("td"));
       String firstname = cells.get(2).getText();
       String lastname = cells.get(1).getText();
+      String del = cells.get(7).getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      ContactData contact = new ContactData().withId(id).withFirstname(firstname).withLastname(lastname);
+      ContactData contact = new ContactData().withId(id).withFirstname(firstname).withLastname(lastname).withTitle(del);
       contacts.add(contact);
     }
     return contacts;
