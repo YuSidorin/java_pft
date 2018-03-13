@@ -48,7 +48,9 @@ public class ContactHelper extends BaseHelper {
 //    wd.findElement(By.xpath("//table[@id='maintable']/tbody/tr/td[8]/a/img")).click(); By.cssSelector("a{href='edit.php?id="+id+"']")
 wd.findElement(By.xpath("//a[.='edit.php?id=" + id +"']")).click();
   }
-
+  public void selectContactById(int id) {
+    wd.findElement(By.cssSelector("input[value='" + id +"']")).click();
+  }
   public void modify(ContactData contact) {
     initContactModificationById(contact.getId());
     fillContactForm((contact), false);
@@ -60,13 +62,16 @@ wd.findElement(By.xpath("//a[.='edit.php?id=" + id +"']")).click();
     click(By.name("update"));
   }
 
-  public void deleteContact() {
-    click(By.xpath("//div[@id='content']/form[2]/input[2]"));
+  public void deleteContact(int id) {
+    wd.findElement(By.xpath("//a[.='edit.php?id=" + id +"']")).click();
   }
-
+  public void deleteSelectedContact() {
+    click(By.cssSelector("input[value='Delete']"));
+  }
   public void delete(ContactData contact) {
-    initContactModificationById(contact.getId());
-    deleteContact();
+    selectContactById(contact.getId());
+    deleteSelectedContact();
+    wd.switchTo().alert().accept();
     goToHomePage();
   }
 
@@ -94,9 +99,8 @@ wd.findElement(By.xpath("//a[.='edit.php?id=" + id +"']")).click();
       List<WebElement> cells = element.findElements(By.tagName("td"));
       String firstname = cells.get(2).getText();
       String lastname = cells.get(1).getText();
-      String del = cells.get(7).getText();
       int id = Integer.parseInt(element.findElement(By.tagName("input")).getAttribute("value"));
-      ContactData contact = new ContactData().withId(id).withFirstname(firstname).withLastname(lastname).withTitle(del);
+      ContactData contact = new ContactData().withId(id).withFirstname(firstname).withLastname(lastname);
       contacts.add(contact);
     }
     return contacts;
