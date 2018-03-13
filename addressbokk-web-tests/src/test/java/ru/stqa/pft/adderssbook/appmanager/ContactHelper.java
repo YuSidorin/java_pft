@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.adderssbook.model.ContactData;
+import ru.stqa.pft.adderssbook.model.Contacts;
 import ru.stqa.pft.adderssbook.model.GroupData;
 
 import java.util.ArrayList;
@@ -95,8 +96,8 @@ public class ContactHelper extends BaseHelper {
     submitContact();
   }
 
-  public Set<ContactData> all() {
-    Set<ContactData> contacts = new HashSet<ContactData>();
+  public Contacts all() {
+    Contacts contacts = new Contacts();
     List<WebElement> elements = wd.findElements(By.xpath("//tr[@name='entry']"));
     for (WebElement element : elements) {
       List<WebElement> cells = element.findElements(By.tagName("td"));
