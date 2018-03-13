@@ -15,7 +15,7 @@ public class ContactCreationTests extends TestBase {
   public void testAddNewContact() {
 
     Set<ContactData> before = app.contact().all();
-    ContactData contact = new ContactData().withFirstname("Yuri").withLastname("Sidorin").withNickname("YuSidorin").withTitle("test").withCompany("Cnet").withEmail("test").withPhone("890898098980").withHomepage("sd").withAddress("asda");
+    ContactData contact = new ContactData().withFirstname("Yuri").withLastname("Sidorin").withNickname("YuSidorin").withTitle("test").withCompany("Cnet").withEmail("test").withPhone("890898098980").withHomepage("sd").withAddress("asda").withGroup("test1");
     app.contact().create(contact, true);
     app.contact().goToHomePage();
     Set<ContactData> after = app.contact().all();
