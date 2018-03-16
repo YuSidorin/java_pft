@@ -50,6 +50,9 @@ public class GroupHelper extends BaseHelper {
     groupCache = null;
     returnToGroupPage();
   }
+  public int count() {
+    return wd.findElements(By.name("selected[]")).size();
+  }
   public void initGroupModification() {
     click(By.name("edit"));
   }

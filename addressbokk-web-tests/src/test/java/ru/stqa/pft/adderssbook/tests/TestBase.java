@@ -7,7 +7,7 @@ import ru.stqa.pft.adderssbook.appmanager.ApplicationManager;
 
 public class TestBase {
 
-  public ApplicationManager app = new ApplicationManager(BrowserType.FIREFOX);
+  public ApplicationManager app = new ApplicationManager(BrowserType.CHROME);
 
   @BeforeMethod
   public void setUp() throws Exception {

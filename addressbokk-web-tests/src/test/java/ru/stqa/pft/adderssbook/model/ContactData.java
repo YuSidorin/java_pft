@@ -6,13 +6,10 @@ public class ContactData {
   private int id = Integer.MAX_VALUE;
   private  String firstname;
   private  String lastname;
-  private  String nickname;
-  private  String title;
-  private  String company;
-  private  String address;
-  private  String phone;
-  private String email;
-  private  String homepage;
+  private  String home;
+  private String mobile;
+  private  String work;
+  private  String allphones;
   private String group;
 
   public ContactData withId(int id) {
@@ -30,50 +27,32 @@ public class ContactData {
     return this;
   }
 
+  public ContactData withHomePhone(String home) {
+    this.home = home;
+    return this;
+  }
 
-  public ContactData withNickname(String nickname) {
-    this.nickname = nickname;
+  public ContactData withMobilePhone(String mobile) {
+    this.mobile = mobile;
+    return this;
+  }
+
+  public ContactData withWorkPhone(String work) {
+    this.work = work;
+    return this;
+  }
+  public ContactData withAllPhones(String allphones) {
+    this.allphones = allphones;
+    return this;
+  }
+  public ContactData withGroup(String group) {
+    this.group = group;
     return this;
   }
 
   @BeforeMethod
   public void setUp() throws Exception {
 
-  }
-
-  public ContactData withTitle(String title) {
-    this.title = title;
-    return this;
-  }
-
-  public ContactData withCompany(String company) {
-    this.company = company;
-    return this;
-  }
-
-  public ContactData withAddress(String address) {
-    this.address = address;
-    return this;
-  }
-
-  public ContactData withPhone(String phone) {
-    this.phone = phone;
-    return this;
-  }
-
-  public ContactData withEmail(String email) {
-    this.email = email;
-    return this;
-  }
-
-  public ContactData withHomepage(String homepage) {
-    this.homepage = homepage;
-    return this;
-  }
-
-  public ContactData withGroup(String group) {
-    this.group = group;
-    return this;
   }
 
   @Override
@@ -115,33 +94,22 @@ public class ContactData {
     return lastname;
   }
 
-  public String getNickname() {
-    return nickname;
+  public String getHomePhone() {
+    return home;
   }
 
-  public String getTitle() {
-    return title;
+  public String getMobilePhone() {
+    return mobile;
   }
 
-  public String getCompany() {
-    return company;
-  }
-
-  public String getAddress() {
-    return address;
-  }
-
-  public String getPhone() {
-    return phone;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public String getHomepage() {
-    return homepage;
+  public String getWorkPhone() {
+    return work;
   }
 
   public String getGroup() { return group; }
+
+  public String getAllPhones() {
+    return allphones;
+  }
 }
+
