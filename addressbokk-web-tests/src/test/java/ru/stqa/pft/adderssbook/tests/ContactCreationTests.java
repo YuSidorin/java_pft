@@ -1,20 +1,27 @@
 package ru.stqa.pft.adderssbook.tests;
 
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 import ru.stqa.pft.adderssbook.model.ContactData;
 import ru.stqa.pft.adderssbook.model.Contacts;
 
 import java.io.File;
-import java.util.Comparator;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 public class ContactCreationTests extends TestBase {
+
+  @DataProvider
+  public Iterator<Object[]> validGroups() {
+    List<Object[]> list = new ArrayList<Object[]>();
+    list.add(new Object[] {"test1", "header 1", "footer1"});
+    list.add(new Object[] {"test2", "header 1", "footer1"});
+    list.add(new Object[] {"test1", "header 1", "footer1"});
+    return list.iterator();
+  }
 
   @Test
   public void testAddNewContact() {
