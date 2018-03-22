@@ -1,5 +1,6 @@
 package ru.stqa.pft.adderssbook.model;
 
+import com.google.gson.annotations.Expose;
 import com.thoughtworks.xstream.annotations.XStreamAlias;
 import org.testng.annotations.BeforeMethod;
 
@@ -9,7 +10,9 @@ import java.io.File;
 public class ContactData {
 
   private int id = Integer.MAX_VALUE;
+  @Expose
   private String firstname;
+  @Expose
   private String lastname;
   private String home;
   private String mobile;
@@ -19,6 +22,7 @@ public class ContactData {
   private String email2;
   private String email3;
   private String allemails;
+  @Expose
   private String address;
   private String group;
   private File photo;
