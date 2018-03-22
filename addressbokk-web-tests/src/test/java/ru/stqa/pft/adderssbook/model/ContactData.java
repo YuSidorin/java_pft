@@ -18,6 +18,7 @@ public class ContactData {
   private String email;
   private String email2;
   private String email3;
+  private String allemails;
   private String address;
   private String group;
   private File photo;
@@ -67,12 +68,16 @@ public class ContactData {
     this.email = email;
     return this;
   }
-  public ContactData withEmail2(String email) {
-    this.email = email;
+  public ContactData withEmail2(String email2) {
+    this.email2 = email2;
     return this;
   }
-  public ContactData withEmail3(String email) {
-    this.email = email;
+  public ContactData withEmail3(String email3) {
+    this.email3 = email3;
+    return this;
+  }
+  public ContactData withAllemails(String allemails) {
+    this.allemails = allemails;
     return this;
   }
 
@@ -157,6 +162,9 @@ public class ContactData {
   }
 
   public String getEmail3() { return email3;
+  }
+  public String getAllEmails() {
+    return allemails;
   }
 
   public String getAddress() {

@@ -18,7 +18,7 @@ import static org.hamcrest.MatcherAssert.*;
             app.goTo();
             ContactData contact = app.contact().all().iterator().next();
             ContactData contactInfoFromEditForm = app.contact().infoFromEditForm(contact);
-            assertThat(contact.getEmail(),  equalTo(mergeEmails(contactInfoFromEditForm)));
+            assertThat(contact.getAllEmails(),  equalTo(mergeEmails(contactInfoFromEditForm)));
         }
         private String mergeEmails(ContactData contact) {
             return Arrays.asList(contact.getEmail(), contact.getEmail2(), contact.getEmail3())
@@ -29,7 +29,7 @@ import static org.hamcrest.MatcherAssert.*;
         }
 
         public static String clean(String email) {
-            return email.replaceAll("\\s", "");
+            return email.replaceAll("\\s", "").replaceAll("[-()]", "");
 
         }
     }
