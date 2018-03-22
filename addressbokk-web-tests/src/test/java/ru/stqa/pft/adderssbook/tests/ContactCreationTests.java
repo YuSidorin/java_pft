@@ -22,14 +22,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 public class ContactCreationTests extends TestBase {
 
   @DataProvider
-  public Iterator<Object[]> validContacts() {
-    List<Object[]> list = new ArrayList<Object[]>();
-    list.add(new Object[] {"test1", "header 1", "footer1"});
-    list.add(new Object[] {"test2", "header 1", "footer1"});
-    list.add(new Object[] {"test1", "header 1", "footer1"});
-    return list.iterator();
-  }
-  @DataProvider
   public Iterator<Object[]> validContactsFromJson() throws IOException {
     List<Object[]> list = new ArrayList<Object[]>();
     BufferedReader reader = new BufferedReader(new FileReader(new File("src/test/resources/contacts.json")));
