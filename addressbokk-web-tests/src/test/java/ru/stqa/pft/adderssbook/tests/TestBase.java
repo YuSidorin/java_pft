@@ -7,7 +7,8 @@ import ru.stqa.pft.adderssbook.appmanager.ApplicationManager;
 
 public class TestBase {
 
-  public ApplicationManager app = new ApplicationManager(BrowserType.CHROME);
+  public ApplicationManager app =
+          new ApplicationManager(System.getProperty("browser", BrowserType.CHROME));
 
   @BeforeMethod
   public void setUp() throws Exception {

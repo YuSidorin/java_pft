@@ -1,0 +1,9 @@
+<suite>
+<test name="Contacts">
+    <classes>
+        <class name="ru.stqa.pft.adderssbook.tests.ContactCreationTests"></class>
+        <class name="ru.stqa.pft.adderssbook.tests.ContactModificationTests"></class>
+        <class name="ru.stqa.pft.adderssbook.tests.ContactDeletionTests"></class>
+    </classes>
+</test>
+        </suite>
