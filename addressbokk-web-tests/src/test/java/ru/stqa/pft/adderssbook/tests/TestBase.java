@@ -14,9 +14,12 @@ import java.lang.reflect.Array;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 
+import static java.lang.System.getProperty;
+
 public class TestBase {
   Logger logger = LoggerFactory.getLogger(TestBase.class);
-  protected static final ApplicationManager app = new ApplicationManager(System.getProperty("browser", BrowserType.CHROME));
+  protected static final ApplicationManager app = new ApplicationManager(getProperty("browser", BrowserType.CHROME));
+
 
 
   @BeforeSuite
