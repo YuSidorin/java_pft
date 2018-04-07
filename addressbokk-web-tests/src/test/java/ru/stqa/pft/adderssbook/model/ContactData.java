@@ -12,9 +12,9 @@ import javax.persistence.Id;
 import javax.persistence.Transient;
 import java.io.File;
 
-@XStreamAlias("group")
+@XStreamAlias("contact")
 @Entity
-@Table(name = "addressbooke`1")
+@Table(name = "addressbook")
 public class ContactData {
   @Id
   @Column(name = "id")
@@ -24,7 +24,7 @@ public class ContactData {
   private String firstname;
   @Expose
 
-  @Column(name = " ")
+  @Column(name = "lastname")
   private String lastname;
 
   @Column(name = "home")
@@ -38,14 +38,30 @@ public class ContactData {
   @Column(name = "work")
   @Type(type = "text")
   private String work;
+
   @Transient
   private String allphones;
+
+  @Column(name = "email")
+  @Type(type = "text")
   private String email;
+
+  @Column(name = "email2")
+  @Type(type = "text")
   private String email2;
+
+  @Column(name = "email3")
+  @Type(type = "text")
   private String email3;
+
+  @Transient
   private String allemails;
+
   @Expose
+  @Column(name = "address")
+  @Type(type = "text")
   private String address;
+
   @Transient
   private String group;
 
