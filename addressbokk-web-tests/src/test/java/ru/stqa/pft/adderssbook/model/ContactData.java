@@ -1,20 +1,16 @@
 package ru.stqa.pft.adderssbook.model;
 
 import com.google.gson.annotations.Expose;
-import com.thoughtworks.xstream.annotations.XStreamAlias;
-import org.hibernate.annotations.Table;
 import org.hibernate.annotations.Type;
 import org.testng.annotations.BeforeMethod;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Transient;
+import javax.persistence.*;
 import java.io.File;
+import java.util.HashSet;
+import java.util.Set;
 
-@XStreamAlias("contact")
 @Entity
-@Table(name = "addressbook")
+@Table (name = "addressbook")
 public class ContactData {
   @Id
   @Column(name = "id")
@@ -62,8 +58,14 @@ public class ContactData {
   @Type(type = "text")
   private String address;
 
-  @Transient
-  private String group;
+  @ManyToMany(fetch = FetchType.EAGER)
+  @JoinTable(name = "address_in_groups",
+          joinColumns = @JoinColumn (name = "id"), inverseJoinColumns = @JoinColumn (name = "group_id"))
+  private Set<GroupData> groups = new HashSet<GroupData>();
+
+  public Set<GroupData> getGroups() {
+    return new Groups(groups);
+  }
 
   @Override
   public boolean equals(Object o) {
@@ -84,7 +86,7 @@ public class ContactData {
     if (email3 != null ? !email3.equals(that.email3) : that.email3 != null) return false;
     if (allemails != null ? !allemails.equals(that.allemails) : that.allemails != null) return false;
     if (address != null ? !address.equals(that.address) : that.address != null) return false;
-    if (group != null ? !group.equals(that.group) : that.group != null) return false;
+
     return photo != null ? photo.equals(that.photo) : that.photo == null;
   }
 
@@ -102,7 +104,6 @@ public class ContactData {
     result = 31 * result + (email3 != null ? email3.hashCode() : 0);
     result = 31 * result + (allemails != null ? allemails.hashCode() : 0);
     result = 31 * result + (address != null ? address.hashCode() : 0);
-    result = 31 * result + (group != null ? group.hashCode() : 0);
     result = 31 * result + (photo != null ? photo.hashCode() : 0);
     return result;
   }
@@ -147,10 +148,6 @@ public class ContactData {
     return this;
   }
 
-  public ContactData withGroup(String group) {
-    this.group = group;
-    return this;
-  }
 
   public ContactData withEmail(String email) {
     this.email = email;
@@ -211,10 +208,6 @@ public class ContactData {
 
   public String getWorkPhone() {
     return work;
-  }
-
-  public String getGroup() {
-    return group;
   }
 
   public String getAllPhones() {

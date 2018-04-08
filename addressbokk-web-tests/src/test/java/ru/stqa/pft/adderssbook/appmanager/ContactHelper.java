@@ -3,17 +3,12 @@ package ru.stqa.pft.adderssbook.appmanager;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
 import ru.stqa.pft.adderssbook.model.ContactData;
 import ru.stqa.pft.adderssbook.model.Contacts;
 import ru.stqa.pft.adderssbook.model.GroupData;
-import ru.stqa.pft.adderssbook.model.Groups;
 
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 public class ContactHelper extends BaseHelper {
 
@@ -31,7 +26,7 @@ public class ContactHelper extends BaseHelper {
 //    type(By.name("email"), contactData.getEmail());
     type(By.name("address"), contactData.getAddress());
     if (creation) {
-      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
+//      new Select(wd.findElement(By.name("new_group"))).selectByVisibleText(contactData.getGroup());
     } else {
       Assert.assertFalse(isElementPresent(By.name("new_group")));
     }
@@ -97,6 +92,20 @@ public class ContactHelper extends BaseHelper {
     goToHomePage();
   }
 
+  public void remove(ContactData contact, GroupData group) {
+    selectContactById(contact.getId());
+    goToContactFromGroupPage(group.getId());
+    selectContactById(contact.getId());
+    removeContactFromGroup();
+    goToHomePage();
+    contactCache = null;
+  }
+  public void goToContactFromGroupPage(int group) {
+    wd.findElement(By.cssSelector(String.format("a[href='./index.php?group=%s']", group))).click();
+  }
+  public void removeContactFromGroup() {
+    click(By.cssSelector("input[name='remove']"));
+  }
   public void goToHomePage() {
     if (isElementPresent(By.id("maintable"))) {
       return;
@@ -113,9 +122,15 @@ public class ContactHelper extends BaseHelper {
     fillContactForm(contactData, creation);
     submitContact();
     contactCache = null;
-
+  }
+  public void add(ContactData contact) {
+    selectContactById(contact.getId());
+    addContactInGroup();
+    goToHomePage();
+    contactCache = null;
   }
 
+  private void addContactInGroup() { click(By.cssSelector("input[name='add']")); }
 
   public int count() {
     return wd.findElements(By.name("selected[]")).size();

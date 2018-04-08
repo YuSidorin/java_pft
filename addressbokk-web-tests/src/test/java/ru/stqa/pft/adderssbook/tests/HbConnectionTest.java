@@ -6,6 +6,7 @@ import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.testng.annotations.BeforeClass;
+import org.testng.annotations.Test;
 import ru.stqa.pft.adderssbook.model.ContactData;
 import ru.stqa.pft.adderssbook.model.GroupData;
 
@@ -31,6 +32,8 @@ public class HbConnectionTest {
         StandardServiceRegistryBuilder.destroy( registry );
       }
     }
+
+  @Test
   public void testHbConnection(){
 
     Session session = sessionFactory.openSession();

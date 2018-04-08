@@ -60,7 +60,7 @@ public class ContactCreationTests extends TestBase {
 
     Contacts before = app.db().contacts();
 //    File photo = new File("src/test/resources/kot.jpg");
-    ContactData contact = new ContactData().withFirstname("Yuri").withLastname("Sidorin").withHomePhone("111").withMobilePhone("222").withWorkPhone("333").withEmail("123@123.qw").withAddress("Qwe qwe").withGroup("test1");
+    ContactData contact = new ContactData().withFirstname("Yuri").withLastname("Sidorin").withHomePhone("111").withMobilePhone("222").withWorkPhone("333").withEmail("123@123.qw").withAddress("Qwe qwe");
     app.contact().create(contact, true);
     app.contact().goToHomePage();
     assertThat(app.contact().count(), equalTo(before.size() + 1));

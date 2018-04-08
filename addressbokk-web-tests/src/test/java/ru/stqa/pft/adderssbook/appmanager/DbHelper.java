@@ -1,6 +1,7 @@
 package ru.stqa.pft.adderssbook.appmanager;
 
 import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.hibernate.boot.MetadataSources;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
@@ -13,7 +14,7 @@ import javax.naming.Referenceable;
 import java.util.List;
 
 public class DbHelper {
-  private final Referenceable sessionFactory;
+  private final SessionFactory sessionFactory;
 
   public DbHelper() {
   // A SessionFactory is set up once for an application!
