@@ -28,4 +28,5 @@ public class JamesHelper extends HelperBase {
     wd.findElement(name("password_confirm")).sendKeys("password1");
     click(By.xpath("//span[@class='submit-button']/button"));
   }
+
 }

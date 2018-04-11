@@ -22,6 +22,7 @@ public class ApplicationManager {
   private RegistrationHelper registrationHelper;
   private MailHelper mailHelper;
   private JamesHelper jamesHelper;
+  private ru.jft.mantis.appmanager.SoapHelper jamesHelper;
 
   public ApplicationManager(String browser) {
     this.browser = browser;
@@ -30,7 +31,7 @@ public class ApplicationManager {
 
   public void init() throws IOException {
     String target = System.getProperty("target", "local");
-    properties.load(new FileReader(new File(String.format("src/test/resorces/%s.properties", target))));
+   properties.load(new FileReader(new File(String.format("src/test/resources/%s.properties", target))));
 
   }
 
@@ -79,6 +80,12 @@ public class ApplicationManager {
       jamesHelper = new JamesHelper(this);
     }
     return  jamesHelper;
+  }
+  public SoapHelper soap() {
+    if (soapHelper == null) {
+      soapHelper = new SoapHelper(this);
+    }
+    return soapHelper;
   }
 }
 

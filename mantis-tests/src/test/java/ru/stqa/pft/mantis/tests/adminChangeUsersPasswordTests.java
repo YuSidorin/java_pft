@@ -20,7 +20,7 @@ public class adminChangeUsersPasswordTests extends TestBase {
   }
 
   @Test
-  public void testChangeUsersPassword() throws IOException {
+  public void testChangeUsersPassword() throws IOException, MessagingException {
     String email = "user1@localhost.localdomain";
     app.james().login();
     app.james().ChangePass();
