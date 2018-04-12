@@ -2,8 +2,8 @@
     <test name="Groups">
         <classes>
             <class name="ru.stqa.pft.adderssbook.tests.GroupCreationTests"></class>
-            <class name="ru.stqa.pft.adderssbook.tests.GroupModificationTests"></class>
-            <class name="ru.stqa.pft.adderssbook.tests.GroupDeletionTest"></class>
+            <!--<class name="ru.stqa.pft.adderssbook.tests.GroupModificationTests"></class>-->
+            <!--<class name="ru.stqa.pft.adderssbook.tests.GroupDeletionTest"></class>-->
         </classes>
     </test>
 </suite>
