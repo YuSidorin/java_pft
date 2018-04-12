@@ -15,7 +15,7 @@ public class PointTest {
   public void isResultPositive(){
     Point p1 = new Point(1, 1);
     Point p2 = new Point(-4, -10);
-    Assert.assertTrue(p1.distance(p2) < 0);
+    Assert.assertTrue(p1.distance(p2) >= 0);
   }
 
   @Test
