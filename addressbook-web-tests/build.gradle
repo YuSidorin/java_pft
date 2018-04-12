@@ -19,12 +19,12 @@ dependencies {
 }
 task testGroups(type: Test) {
     useTestNG {
-        suites 'C:\\Work\\java_pft\\addressbokk-web-tests\\src\\test\\resources\\testng-groups.xml'
+        suites 'src/test/resources/testng-groups.xml'
     }
 }
 task testContacts(type: Test) {
     useTestNG {
-        suites 'C:\\Work\\java_pft\\addressbokk-web-tests\\src\\test\\resources\\testng-contacts.xml'
+        suites '/src/test/resources/estng-contacts.xml'
     }
 
     if (project.hasProperty('browser')){
