@@ -11,6 +11,7 @@ import java.util.Set;
 
 @XStreamAlias("group")
 @Entity
+@Table(name = "group_list")
 public class GroupData {
   @Override
   public boolean equals(Object o) {
@@ -40,9 +41,11 @@ public class GroupData {
   private int id = Integer.MAX_VALUE;
 @Expose
 @Column(name = "group_name")
+@Type(type = "text")
   private  String name;
   @Expose
   @Column(name = "group_header")
+  @Type(type = "text")
   private  String header;
   @Expose
   @Column(name = "group_footer")
