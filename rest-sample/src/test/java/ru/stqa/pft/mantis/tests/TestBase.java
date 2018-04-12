@@ -1,23 +1,37 @@
 package ru.stqa.pft.mantis.tests;
 
-import org.openqa.selenium.remote.BrowserType;
-import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
-import ru.stqa.pft.mantis.appmanager.ApplicationManager;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonParser;
+import org.apache.http.client.fluent.Executor;
+import org.testng.SkipException;
+import java.io.IOException;
+import static org.apache.http.client.fluent.Request.Get;
 
 public class TestBase {
 
-  protected static final ApplicationManager app = new ApplicationManager(System.getProperty("browser", BrowserType.CHROME));
-
-  @BeforeSuite
-  public void setUp() throws Exception {
-    app.init();
+  public Executor getExecutor() {
+    return Executor.newInstance().auth("28accbe43ea112d9feb328d2c00b3eed", "");
   }
 
-  @AfterSuite(alwaysRun = true)
-  public void tearDown() {
-    app.stop();
+  boolean isIssueOpen(int issueId) throws IOException {
+
+    String json = getExecutor().execute(Get("http://demo.bugify.com/api/issues/" + issueId + ".json"))
+            .returnContent().asString();
+    JsonElement parsed = new JsonParser().parse(json);
+    JsonElement issues = parsed.getAsJsonObject().get("issues");
+    JsonElement issue_array = issues.getAsJsonArray().get(0);
+
+    String states = issue_array.getAsJsonObject().get("state_name").getAsString();
+
+    if (states.equals("Open")) {
+      return true;
+    } return false;
   }
 
-}
+  public void skipIfNotFixed(int issueId) throws IOException {
+
+    if (isIssueOpen(issueId)) {
+      throw new SkipException("Ignored because of issue " + issueId);
+    }
+  }
 }
