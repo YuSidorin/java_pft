@@ -67,6 +67,7 @@ public class GroupHelper extends BaseHelper {
     returnToGroupPage();
   }
   public void delete(GroupData group) {
+    returnToGroupPage();
     selectGroupById(group.getId());
     deleteSelectedGroup();
     groupCache = null;

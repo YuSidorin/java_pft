@@ -39,15 +39,15 @@ public class TestBase {
     app.stop();
   }
 
-  @BeforeMethod
-  public void logTeststart(Method m,  Object[] p) {
-    logger.info("Start test" + m.getName()+ " with parameters" + Arrays.asList(p));
-  }
-
-  @AfterSuite (alwaysRun = true)
-  public void logTeststop(Method m, Object[] p) {
-    logger.info("Stop test" + m.getName() + " with parameters" + Arrays.asList(p));
-  }
+//  @BeforeMethod
+//  public void logTeststart(Method m,  Object[] p) {
+//    logger.info("Start test" + m.getName()+ " with parameters" + Arrays.asList(p));
+//  }
+//
+//  @AfterSuite (alwaysRun = true)
+//  public void logTeststop(Method m, Object[] p) {
+//    logger.info("Stop test" + m.getName() + " with parameters" + Arrays.asList(p));
+//  }
 
   public void verifyGroupListInUI() {
     if (Boolean.getBoolean("verifyUI")) {
